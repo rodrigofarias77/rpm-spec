@@ -14,7 +14,10 @@ Requires: gnome-control-center gnome-menus gnome-screensaver gnome-session ibus 
 
 %prep
 rm -rf %{name}
-git clone --depth=1 --recurse-submodules --shallow-submodules https://github.com/solus-project/budgie-desktop.git
+git clone https://github.com/solus-project/budgie-desktop.git
+cd %{name}
+git reset --hard b4cc35c4586ae39cfd26dfd1e49b3d2f5f58bb81
+git submodule update --init
 
 %build
 cd %{name}
