@@ -6,12 +6,14 @@ WORKDIR /root
 
 ARG spec
 
-COPY $spec .spec
+ENV local project.spec
 
-RUN dnf -y install fedora-packager && dnf -y builddep .spec && dnf clean all
+COPY $spec $local
+
+RUN dnf -y install fedora-packager && dnf -y builddep $local && dnf clean all
 
 RUN rpmdev-setuptree
 
-ENTRYPOINT rpmbuild -bb .spec && cp -v rpmbuild/RPMS/x86_64/*.rpm /mnt
+ENTRYPOINT rpmbuild -bb $local && cp -v rpmbuild/RPMS/x86_64/*.rpm /mnt
 
 # vim: filetype=dockerfile
