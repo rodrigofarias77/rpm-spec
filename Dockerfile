@@ -2,15 +2,17 @@ ARG version=latest
 
 FROM fedora:$version
 
+ARG spec
+
 WORKDIR /root
 
-ARG spec
+RUN dnf -y install fedora-packager && dnf clean all
 
 ENV local project.spec
 
 COPY $spec $local
 
-RUN dnf -y install fedora-packager && dnf -y builddep $local && dnf clean all
+RUN dnf -y builddep $local && dnf clean all
 
 RUN rpmdev-setuptree
 
