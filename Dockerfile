@@ -6,7 +6,7 @@ ARG spec
 
 WORKDIR /root
 
-RUN dnf -y install fedora-packager && dnf clean all
+RUN dnf -y upgrade && dnf -y install fedora-packager
 
 ENV local project.spec
 
