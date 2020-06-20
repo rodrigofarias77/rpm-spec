@@ -17,5 +17,3 @@ RUN dnf -y builddep $local && dnf clean all
 RUN rpmdev-setuptree
 
 ENTRYPOINT rpmbuild -bb $local && cp -v rpmbuild/RPMS/x86_64/*.rpm /mnt
-
-# vim: filetype=dockerfile
