@@ -10,7 +10,7 @@ ARG spec
 
 COPY $spec .
 
-RUN dnf -y builddep $spec
+RUN dnf -y upgrade && dnf -y builddep $spec
 
 RUN rpmdev-setuptree
 
