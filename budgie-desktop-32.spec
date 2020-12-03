@@ -1,6 +1,6 @@
 Name: budgie-desktop
-Version: 10.5.1
-Release: 88%{?dist}
+Version: 10.5.2
+Release: 1%{?dist}
 Summary: The Budgie Desktop is a feature-rich, modern desktop designed to keep out the way of the user
 
 License: GPL and LGPL
@@ -15,7 +15,7 @@ Requires: gnome-control-center gnome-menus gnome-screensaver gnome-session ibus 
 %prep
 git clone --depth=100 https://github.com/solus-project/budgie-desktop.git
 cd %{name}
-git reset --hard 9c0da3157725336f8af7a83930bd56eb3983d176
+git reset --hard f0e0f9f1d05c6ce30181d3ff1dca92e864222746
 git submodule update --init
 
 %build
