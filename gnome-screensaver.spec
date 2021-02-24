@@ -17,8 +17,8 @@ gnome-screensaver is a screen saver and locker that aims to have
 simple, sane, secure defaults and be well integrated with the desktop.
 
 %prep
-curl -LOs http://download.gnome.org/sources/gnome-screensaver/3.6/%{name}-%{version}.tar.xz
-tar -xf %{name}-%{version}.tar.xz --strip-components=1
+curl -LOs http://download.gnome.org/sources/gnome-screensaver/3.6/gnome-screensaver-%{version}.tar.xz
+tar -xf *.tar.xz --strip-components=1
 curl -LOs https://raw.githubusercontent.com/rodrigofarias77/rpm-spec/master/gnome-screensaver.patch
 patch -p1 < gnome-screensaver.patch
 autoreconf -f -i
