@@ -1,0 +1,69 @@
+diff -up gnome-screensaver-2.20.0/data/gnome-screensaver.selinux_permit gnome-screensaver-2.20.0/data/gnome-screensaver
+--- gnome-screensaver-2.20.0/data/gnome-screensaver.selinux_permit	2007-11-12 13:51:03.000000000 -0500
++++ gnome-screensaver-2.20.0/data/gnome-screensaver	2007-11-12 13:57:43.000000000 -0500
+@@ -1,11 +1,12 @@
+ #%PAM-1.0
+ 
+ # Fedora Core
++auth     [success=done ignore=ignore default=bad] pam_selinux_permit.so
++session    include	system-auth
+ auth       include	system-auth
+ auth       optional     pam_gnome_keyring.so
+ account    include	system-auth
+ password   include	system-auth
+-session    include	system-auth
+ 
+ # SuSE/Novell
+ #auth       include      common-auth
+From dc516c4e99c45ee4433062f473665e59a06de546 Mon Sep 17 00:00:00 2001
+From: Yaakov Selkowitz <yselkowi@redhat.com>
+Date: Thu, 16 Jul 2015 22:21:18 -0500
+Subject: [PATCH] Avoid SEGV in gs_fade_reset
+
+On Fedora 21, when run in tigervnc-server built with xorg-x11-server-1.16,
+but not on Xorg nor on Fedora 22 with tigervnc-server built with 1.17,
+it appears that nothing provides the necessary functionality for a fade,
+but (*fade_finish) is called without checking.
+
+Signed-off-by: Yaakov Selkowitz <yselkowi@redhat.com>
+---
+ src/gs-fade.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/src/gs-fade.c b/src/gs-fade.c
+index 68e596f..03e02cf 100644
+--- a/src/gs-fade.c
++++ b/src/gs-fade.c
+@@ -835,8 +835,10 @@ gs_fade_reset (GSFade *fade)
+ 
+         gs_fade_set_alpha (fade, fade->priv->current_alpha);
+ 
+-        for (i = 0; i < fade->priv->num_screens; i++)
+-                fade->priv->screen_priv[i].fade_finish (fade, i);
++        for (i = 0; i < fade->priv->num_screens; i++) {
++                if (fade->priv->screen_priv[i].fade_type != FADE_TYPE_NONE)
++                        fade->priv->screen_priv[i].fade_finish (fade, i);
++        }
+ }
+ 
+ static void
+-- 
+2.1.0
+
+API changed in 3.35.4:
+
+https://gitlab.gnome.org/GNOME/gnome-desktop/commit/2882b3e5840b14f4487f19084f9e362786ae4fa3
+
+diff -up a/src/gs-manager.c b/src/gs-manager.c
+--- a/src/gs-manager.c	2020-01-16 16:33:22.958802273 -0500
++++ b/src/gs-manager.c	2020-01-16 16:33:33.440696997 -0500
+@@ -820,8 +820,7 @@ apply_background_to_window (GSManager *m
+         surface = gnome_bg_create_surface (manager->priv->bg,
+                                            gdk_window,
+                                            width,
+-                                           height,
+-                                           FALSE);
++                                           height);
+         gs_window_set_background_surface (window, surface);
+         cairo_surface_destroy (surface);
+ }
