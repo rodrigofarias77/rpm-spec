@@ -1,14 +1,14 @@
 Name: budgie-desktop
 Version: 10.5.2.13
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: The Budgie Desktop is a feature-rich, modern desktop designed to keep out the way of the user
 
 License: GPL and LGPL
 URL: https://github.com/solus-project/budgie-desktop
 
-BuildRequires: accountsservice-devel alsa-lib-devel cmake git gnome-bluetooth-libs-devel gnome-desktop3-devel gnome-menus-devel gnome-settings-daemon-devel gtk3-devel gtk-doc ibus-devel intltool libnotify-devel libpeas-devel libuuid-devel libwnck3-devel mesa-libEGL-devel meson mutter-devel polkit-devel pulseaudio-libs-devel sassc upower-devel vala
+BuildRequires: accountsservice-devel alsa-lib-devel cmake gcc git gnome-bluetooth-libs-devel gnome-desktop3-devel gnome-menus-devel gnome-settings-daemon-devel graphene-devel gtk3-devel gtk-doc ibus-devel intltool libnotify-devel libpeas-devel libuuid-devel libwnck3-devel mesa-libEGL-devel meson mutter-devel polkit-devel pulseaudio-libs-devel sassc upower-devel vala
 
-Requires: gnome-menus gnome-session gnome-settings-daemon ibus-libs libpeas librsvg2 libwnck3 mutter
+Requires: accountsservice gnome-session gnome-settings-daemon librsvg2
 
 Recommends: gnome-control-center gnome-screensaver network-manager-applet
 
