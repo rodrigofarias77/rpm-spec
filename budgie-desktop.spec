@@ -1,6 +1,6 @@
 Name: budgie-desktop
-Version: 10.5.2.24
-Release: 1%{?dist}
+Version: 10.5.3.0
+Release: 2%{?dist}
 Summary: The Budgie Desktop is a feature-rich, modern desktop designed to keep out the way of the user
 
 License: GPL and LGPL
@@ -10,14 +10,15 @@ BuildRequires: accountsservice-devel alsa-lib-devel cmake gcc git gnome-bluetoot
 
 Requires: accountsservice gnome-session gnome-settings-daemon librsvg2
 
-Recommends: gnome-control-center gnome-screensaver network-manager-applet
+Recommends: budgie-screensaver gnome-control-center network-manager-applet
 
 %description
 
 %prep
 git clone --depth=100 https://github.com/solus-project/budgie-desktop.git .
-git reset --hard 7a5dcfdaa25e887432e7edb3f8aee060992ee1c1
+git reset --hard 12eec71e469c697d71fd4d1b0b6df17b24f335c9
 git submodule update --init
+sed -i '/^assert.budgie_screensaver/d' meson.build
 
 %build
 %meson
