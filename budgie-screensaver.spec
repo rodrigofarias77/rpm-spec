@@ -1,6 +1,6 @@
 Name: budgie-screensaver
 Version: 4.0.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: Fork of GNOME Screensaver for Budgie 10
 
 License: GPL
@@ -15,6 +15,7 @@ Budgie Screensaver is a fork of gnome-screensaver intended for use with Budgie D
 
 %prep
 git clone https://github.com/getsolus/budgie-screensaver.git .
+sed -i '/^auth.*pam_gnome_keyring/s/^/-/' data/budgie-screensaver
 ./autogen.sh
 
 %build
