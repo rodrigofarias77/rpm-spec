@@ -1,10 +1,10 @@
 Name: budgie-desktop
-Version: 10.5.3.13
+Version: 10.5.3.36
 Release: 2%{?dist}
 Summary: The Budgie Desktop is a feature-rich, modern desktop designed to keep out the way of the user
 
 License: GPL and LGPL
-URL: https://github.com/solus-project/budgie-desktop
+URL: https://github.com/BuddiesOfBudgie/budgie-desktop
 
 BuildRequires: accountsservice-devel alsa-lib-devel cmake gcc git gnome-bluetooth-libs-devel gnome-desktop3-devel gnome-menus-devel gnome-settings-daemon-devel graphene-devel gtk3-devel gtk-doc ibus-devel intltool libnotify-devel libpeas-devel libuuid-devel libwnck3-devel mesa-libEGL-devel meson mutter-devel polkit-devel pulseaudio-libs-devel sassc upower-devel vala
 
@@ -15,11 +15,11 @@ Recommends: budgie-screensaver gnome-control-center network-manager-applet
 %description
 
 %prep
-git clone --depth=100 https://github.com/solus-project/budgie-desktop.git .
-git reset --hard 49fe42cd822fd672fc95d4eb962e0357b7f71afd
+git clone --depth=100 https://github.com/BuddiesOfBudgie/budgie-desktop.git .
+git reset --hard 361913cb2684ce623d266263356fc07e04eebefa
 git submodule update --init
-git revert -n 516fe03aeea291f184dc21f7b6bf4ca8471b3672
-sed -i '/^assert.budgie_screensaver/d' meson.build
+sed -i -r '/assert.(budgie|gnome)_screensaver/d' meson.build
+sed -i '/^dep_vala/s/0.52.5/0.48.0/' meson.build
 
 %build
 %meson
