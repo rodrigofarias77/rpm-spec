@@ -1,5 +1,5 @@
 Name: budgie-desktop
-Version: 10.5.3.127
+Version: 10.5.3.129
 Release: 2%{?dist}
 Summary: The Budgie Desktop is a feature-rich, modern desktop designed to keep out the way of the user
 
@@ -16,7 +16,7 @@ Recommends: budgie-screensaver gnome-control-center network-manager-applet
 
 %prep
 git clone --depth=100 https://github.com/BuddiesOfBudgie/budgie-desktop.git .
-git reset --hard 53515808589d78aa733c797f2284efcf277cb130
+git reset --hard 34c838dd06853208fc4945ef733c70ca617cae24
 git submodule update --init
 sed -i -r '/assert.(budgie|gnome)_screensaver/d' meson.build
 
