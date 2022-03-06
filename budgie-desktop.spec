@@ -1,6 +1,6 @@
 Name: budgie-desktop
 Version: 10.6.0
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: The Budgie Desktop is a feature-rich, modern desktop designed to keep out the way of the user
 
 License: GPL and LGPL
@@ -31,12 +31,9 @@ sed -i -r '/assert.(budgie|gnome)_screensaver/d' meson.build
 %config %{_sysconfdir}/*
 %{_bindir}/*
 %{_datadir}/*
+%{_includedir}/*
 %{_libdir}/*
 
-%exclude %{_datadir}/gir-1.0
-%exclude %{_datadir}/vala
-%exclude %{_includedir}
-%exclude %{_libdir}/lib*.so
 %exclude %{_libdir}/pkgconfig
 
 %changelog
