@@ -1,12 +1,12 @@
 Name: budgie-screensaver
-Version: 4.0.0
-Release: 2%{?dist}
-Summary: Fork of GNOME Screensaver for Budgie 10
+Version: 5.0.1
+Release: 1%{?dist}
+Summary: Budgie Screensaver is a fork of old gnome screensaver for purposes of providing an authentication prompt on wake
 
 License: GPL
-URL: https://github.com/getsolus/budgie-screensaver
+URL: https://github.com/BuddiesOfBudgie/budgie-screensaver
 
-BuildRequires: dbus-glib-devel git gnome-common gnome-desktop3-devel gtk3-devel intltool pam-devel which
+BuildRequires: dbus-glib-devel gcc gnome-desktop3-devel intltool meson pam-devel
 
 Requires: dbus-glib gnome-desktop3 libgnomekbd
 
@@ -14,22 +14,18 @@ Requires: dbus-glib gnome-desktop3 libgnomekbd
 Budgie Screensaver is a fork of gnome-screensaver intended for use with Budgie Desktop and is similar in purpose to other screensavers such as MATE Screensaver.
 
 %prep
-git clone https://github.com/getsolus/budgie-screensaver.git .
-sed -i '/^auth.*pam_gnome_keyring/s/^/-/' data/budgie-screensaver
-./autogen.sh
+git clone https://github.com/BuddiesOfBudgie/budgie-screensaver .
+git reset --hard 9ec7cf07a92d28c3958884f019bb58039f4b3596
 
 %build
-%configure --with-mit-ext=no
-make
+%meson
+%meson_build
 
 %install
-make install DESTDIR=$RPM_BUILD_ROOT
-%find_lang %{name}
+%meson_install
 
-%files -f %{name}.lang
-%doc AUTHORS NEWS README COPYING
-%doc %{_mandir}/man1/*.1.gz
+%files
 %{_bindir}/*
-%{_datadir}/applications/*
+%{_datadir}/*
 %{_libexecdir}/*
-%{_sysconfdir}/pam.d/*
+%{_sysconfdir}/*
