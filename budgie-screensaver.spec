@@ -6,7 +6,7 @@ Summary: Budgie Screensaver is a fork of old gnome screensaver for purposes of p
 License: GPL
 URL: https://github.com/BuddiesOfBudgie/budgie-screensaver
 
-BuildRequires: dbus-glib-devel gcc gnome-desktop3-devel intltool meson pam-devel
+BuildRequires: dbus-glib-devel gcc git gnome-desktop3-devel intltool meson pam-devel
 
 Requires: dbus-glib gnome-desktop3 libgnomekbd
 
