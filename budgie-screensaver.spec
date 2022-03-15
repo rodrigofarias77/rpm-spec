@@ -1,6 +1,6 @@
 Name: budgie-screensaver
 Version: 5.0.1
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: Budgie Screensaver is a fork of old gnome screensaver for purposes of providing an authentication prompt on wake
 
 License: GPL
@@ -16,6 +16,7 @@ Budgie Screensaver is a fork of gnome-screensaver intended for use with Budgie D
 %prep
 git clone https://github.com/BuddiesOfBudgie/budgie-screensaver .
 git reset --hard 9ec7cf07a92d28c3958884f019bb58039f4b3596
+sed -i '/^auth.*pam_gnome_keyring/s/^/-/' data/budgie-screensaver
 
 %build
 %meson
