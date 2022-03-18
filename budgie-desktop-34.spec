@@ -1,7 +1,7 @@
 Name: budgie-desktop
-Version: 10.6.3
+Version: 10.6.5
 Release: 2%{?dist}
-Summary: The Budgie Desktop is a feature-rich, modern desktop designed to keep out the way of the user
+Summary: Budgie Desktop is a familiar, modern desktop environment
 
 License: GPL and LGPL
 URL: https://github.com/BuddiesOfBudgie/budgie-desktop
@@ -13,10 +13,11 @@ Requires: accountsservice gnome-session gnome-settings-daemon librsvg2
 Recommends: budgie-screensaver gnome-control-center network-manager-applet
 
 %description
+The Budgie Desktop is a feature-rich, modern desktop designed to keep out the way of the user.
 
 %prep
 git clone --depth=100 https://github.com/BuddiesOfBudgie/budgie-desktop.git .
-git reset --hard 34e513a5604c79a9383e3b9a320c1cae398e3b5e
+git reset --hard 62fb5419daa667a5b72d1b24064576ca842b4b98
 git submodule update --init
 git revert -n 314132131a46b9ba57b68848c5b32a475034c917
 sed -i -r '/assert.(budgie|gnome)_screensaver/d; /^dep_vala/s/0.52.5/0.48.0/' meson.build
@@ -29,12 +30,9 @@ sed -i -r '/assert.(budgie|gnome)_screensaver/d; /^dep_vala/s/0.52.5/0.48.0/' me
 %meson_install
 
 %files
-%config %{_sysconfdir}/*
 %{_bindir}/*
 %{_datadir}/*
 %{_includedir}/*
 %{_libdir}/*
-
+%{_sysconfdir}/*
 %exclude %{_libdir}/pkgconfig
-
-%changelog
