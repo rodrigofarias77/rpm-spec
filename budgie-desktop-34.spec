@@ -19,7 +19,7 @@ The Budgie Desktop is a feature-rich, modern desktop designed to keep out the wa
 git clone --depth=100 https://github.com/BuddiesOfBudgie/budgie-desktop.git .
 git reset --hard 14b685bfad04e98201af4061e05bcc9b8626f0f0
 git submodule update --init
-git revert -n 314132131a46b9ba57b68848c5b32a475034c917
+git revert -n 05e34d01174267f2ba2fcb9f1ca74cff5aa4380a 314132131a46b9ba57b68848c5b32a475034c917
 sed -i -r '/assert.(budgie|gnome)_screensaver/d; /^dep_vala/s/0.52.5/0.48.0/' meson.build
 
 %build
