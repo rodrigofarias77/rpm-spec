@@ -1,12 +1,12 @@
 Name: budgie-desktop
-Version: 10.6.20
+Version: 10.6.46
 Release: 2%{?dist}
 Summary: Budgie Desktop is a familiar, modern desktop environment
 
 License: GPL and LGPL
 URL: https://github.com/BuddiesOfBudgie/budgie-desktop
 
-BuildRequires: accountsservice-devel alsa-lib-devel cmake gcc git gnome-bluetooth-libs-devel gnome-desktop3-devel gnome-menus-devel gnome-settings-daemon-devel graphene-devel gtk3-devel gtk-doc ibus-devel intltool libnotify-devel libpeas-devel libuuid-devel libwnck3-devel mesa-libEGL-devel meson mutter-devel polkit-devel pulseaudio-libs-devel sassc upower-devel vala
+BuildRequires: accountsservice-devel alsa-lib-devel annobin-plugin-gcc cmake gcc git gnome-bluetooth3.34-libs-devel gnome-desktop3-devel gnome-menus-devel gnome-settings-daemon-devel graphene-devel gtk3-devel gtk-doc ibus-devel intltool libnotify-devel libpeas-devel libuuid-devel libwnck3-devel mesa-libEGL-devel meson mutter-devel polkit-devel pulseaudio-libs-devel sassc upower-devel vala
 
 Requires: accountsservice gnome-session gnome-settings-daemon librsvg2
 
@@ -17,10 +17,9 @@ The Budgie Desktop is a feature-rich, modern desktop designed to keep out the wa
 
 %prep
 git clone --depth=100 https://github.com/BuddiesOfBudgie/budgie-desktop.git .
-git reset --hard be79b9c2065bcdccd1786f1f193522c5e6d5845b
+git reset --hard 1815ef315e48fc0582e1e67441bf9bc47b400001
 git submodule update --init
-git revert -n 314132131a46b9ba57b68848c5b32a475034c917
-sed -i -r '/assert.(budgie|gnome)_screensaver/d; /^dep_vala/s/0.52.5/0.48.0/' meson.build
+sed -i -r '/assert.(budgie|gnome)_screensaver/d' meson.build
 
 %build
 %meson
