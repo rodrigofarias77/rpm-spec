@@ -1,5 +1,5 @@
 Name: budgie-desktop
-Version: 10.6.46
+Version: 10.6.51
 Release: 2%{?dist}
 Summary: Budgie Desktop is a familiar, modern desktop environment
 
@@ -17,7 +17,7 @@ The Budgie Desktop is a feature-rich, modern desktop designed to keep out the wa
 
 %prep
 git clone --depth=100 https://github.com/BuddiesOfBudgie/budgie-desktop.git .
-git reset --hard 1815ef315e48fc0582e1e67441bf9bc47b400001
+git reset --hard 5717f54062d941cd77a03a444c212aa8f05e0ef4
 git submodule update --init
 sed -i -r '/assert.(budgie|gnome)_screensaver/d' meson.build
 
