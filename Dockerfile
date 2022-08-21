@@ -16,4 +16,4 @@ RUN rpmdev-setuptree
 
 ENV spec=$spec
 
-ENTRYPOINT dnf -y upgrade && rpmbuild -bb /mnt/$spec && cp -v rpmbuild/RPMS/x86_64/*.rpm /mnt
+ENTRYPOINT rpmbuild -bb /mnt/$spec && cp -v rpmbuild/RPMS/x86_64/*.rpm /mnt
